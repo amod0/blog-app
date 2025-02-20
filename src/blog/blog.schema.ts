@@ -7,7 +7,7 @@ export class Blog extends Document {
   title: string;
 
   @Prop({ required: true })
-  Content: string;
+  content: string;
 
   @Prop({ default: Date.now })
   createdAt: Date;

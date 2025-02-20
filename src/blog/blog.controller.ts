@@ -1,17 +1,18 @@
 import {
-  Controller,
   Body,
-  UsePipes,
-  Param,
-  Post,
-  Delete,
-  ValidationPipe,
+  Controller,
   Get,
+  Post,
+  Param,
+  Put,
+  Delete,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { BlogDto } from './blog.dto';
 
-@Controller('blog')
+@Controller('blogs')
 export class BlogController {
   constructor(private readonly blogService: BlogService) {}
 
@@ -35,7 +36,7 @@ export class BlogController {
   }
 
   //Put/Update
-  @Post(':id')
+  @Put(':id')
   @UsePipes(new ValidationPipe())
   async update(@Param('id') id: string, @Body() updateBlogDto: BlogDto) {
     return this.blogService.update(id, updateBlogDto);

@@ -9,24 +9,25 @@ export class BlogService {
   constructor(@InjectModel(Blog.name) private blogModel: Model<Blog>) {}
 
   async create(BlogDto: BlogDto): Promise<Blog> {
-    const newBlog = new.this.blogModel(BlogDto);
+    const newBlog = new this.blogModel(BlogDto);
     return newBlog.save();
   }
 
   async findAll(): Promise<Blog[]> {
     return this.blogModel.find().exec();
   }
-  async findOne(id: string): Promise<BLog> {
-    return this.BlogModel.findById(id).exec();
+
+  async findOne(id: string): Promise<Blog | null> {
+    return this.blogModel.findById(id).exec();
   }
 
-  async update(id: string, UpdatedBlogDto: BlogDto): Promise<Blog> {
+  async update(id: string, UpdatedBlogDto: BlogDto): Promise<Blog | null> {
     return this.blogModel
-      .findByIdandUpdate(id, UpdatedBlogDto, { new: true })
+      .findByIdAndUpdate(id, UpdatedBlogDto, { new: true })
       .exec();
   }
 
-  async delete(id: string): Promise<Blog> {
-    return this.blogModel.findByIdandDelete(id).exec();
+  async delete(id: string): Promise<Blog | null> {
+    return this.blogModel.findByIdAndDelete(id).exec();
   }
 }
